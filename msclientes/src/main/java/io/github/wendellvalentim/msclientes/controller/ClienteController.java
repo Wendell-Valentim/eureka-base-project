@@ -1,0 +1,17 @@
+package io.github.wendellvalentim.msclientes.controller;
+
+import lombok.NoArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/clientes")
+@NoArgsConstructor
+public class ClienteController {
+
+    @GetMapping
+    public String ok() {
+        return "ok";
+    }
+}
