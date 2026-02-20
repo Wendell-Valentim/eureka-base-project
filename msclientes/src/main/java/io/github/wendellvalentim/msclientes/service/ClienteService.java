@@ -3,6 +3,7 @@ package io.github.wendellvalentim.msclientes.service;
 import io.github.wendellvalentim.msclientes.exception.CpfNotFoundException;
 import io.github.wendellvalentim.msclientes.model.Cliente;
 import io.github.wendellvalentim.msclientes.repository.ClienteRepository;
+import io.github.wendellvalentim.msclientes.validator.ClienteValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,12 @@ public class ClienteService {
 
     private final ClienteRepository clienteRepository;
 
+    private final ClienteValidator validator;
+
     public Cliente salvar(Cliente cliente){
+
+        validator.validar(cliente);
+
         return clienteRepository.save(cliente);
     }
 
