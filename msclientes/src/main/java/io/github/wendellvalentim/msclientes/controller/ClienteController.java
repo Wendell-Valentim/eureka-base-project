@@ -31,8 +31,8 @@ public class ClienteController implements GenericController {
         return ResponseEntity.created(location).build();
     }
 
-    @GetMapping
-    public ResponseEntity<Cliente> dadosCliente(@RequestParam("cpf") String cpf) {
+    @GetMapping("/{cpf}")
+    public ResponseEntity<Cliente> dadosCliente(@PathVariable("cpf") String cpf) {
         var cliente = service.buscarPorCpf(cpf);
         return ResponseEntity.ok(cliente);
     }

@@ -10,16 +10,18 @@ import org.hibernate.validator.constraints.br.CPF;
 import java.time.LocalDate;
 
 
-public class ClienteRequestDTO {
-    @CPF(message = "Preicsa conter 11 digitos!")
-    @NotBlank(message = "Campo obrigatorio!")
-    private String cpf;
+public record ClienteRequestDTO(
+        @CPF(message = "Preicsa conter 11 digitos!")
+        @NotBlank(message = "Campo obrigatorio!")
+        String cpf,
 
-    @NotBlank(message = "Campo obrigatorio")
-    private String nome;
+        @NotBlank(message="Campo obrigatorio")
+        String nome,
 
-    @Past
-    @NotNull
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dataNascimento;
-}
+        @Past
+        @NotNull
+        @JsonFormat(pattern = "dd/MM/yyyy")
+         LocalDate dataNascimento
+){
+
+        }
