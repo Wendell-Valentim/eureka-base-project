@@ -49,6 +49,7 @@ public class CartoesController implements GenericController {
     @GetMapping(params = "cpf")
     public ResponseEntity<List<CartoesPorClienteResponse>> getCartoesByCliente(@RequestParam("cpf") String cpf){
         List<ClienteCartao> lista = clienteService.listCartoesByCpf(cpf);
-        return ResponseEntity.ok(clienteMapper.toDTO(lista));
+        List<CartoesPorClienteResponse> result = lista.stream().map(clienteMapper::toDTO).collect(Collectors.toList());
+        return ResponseEntity.ok(result);
     }
 }
