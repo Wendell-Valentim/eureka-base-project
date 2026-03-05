@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.UUID;
 
 @Entity
@@ -33,4 +34,10 @@ public class Cliente {
 
     @LastModifiedDate
     private LocalDateTime dataAtualizacao;
+
+
+    public Integer getIdade() {
+        if (this.dataNascimento == null) return null;
+        return Period.between(this.dataNascimento, LocalDate.now()).getYears();
+    }
 }

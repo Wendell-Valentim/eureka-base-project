@@ -2,14 +2,14 @@ package io.github.wendellvalentim.msavaliadorcredito.service;
 
 import io.github.wendellvalentim.msavaliadorcredito.infra.CartaoResourceClient;
 import io.github.wendellvalentim.msavaliadorcredito.infra.ClienteResourceClient;
-import io.github.wendellvalentim.msavaliadorcredito.model.CartaoCliente;
-import io.github.wendellvalentim.msavaliadorcredito.model.DadosCliente;
-import io.github.wendellvalentim.msavaliadorcredito.model.SituacaoCliente;
+import io.github.wendellvalentim.msavaliadorcredito.model.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +25,30 @@ public class avaliadorCreditoService {
                 .cliente(dadosClientResponse.getBody())
                 .cartao(dadosCartaoResponse.getBody())
                 .build();
+    }
+
+    public RetornoAvaliacaoCliente realizarAvaliacao(String cpf, Long renda) {
+        ResponseEntity<DadosCliente> dadosClientResponse = client.dadosCliente(cpf);
+        ResponseEntity<List<Cartao>> cartoesResponse = cartaoClient.getCartoesRendaAte(renda);
+
+        List<Cartao> cartoes = cartoesResponse.getBody();
+        var listaCartoesAprovados = cartoes.stream().map(cartao -> {
+            DadosCliente dadosCliente = dadosClientResponse.getBody();
+
+            BigDecimal limiteBasico = cartao.getLimite();
+            BigDecimal idadeBD = BigDecimal.valueOf(dadosCliente.getIdade());
+
+            BigDecimal fator = idadeBD.divide(BigDecimal.valueOf(10));
+            BigDecimal limiteAprovado = fator.multiply(limiteBasico);
+
+            CartoesAprovados aprovado = new CartoesAprovados();
+            aprovado.setNome(cartao.getNome());
+            aprovado.setBandeira(cartao.getBandeira());
+            aprovado.setLimiteAprovado(limiteAprovado);
+
+            return aprovado;
+        }).collect(Collectors.toList());
+        return new RetornoAvaliacaoCliente(listaCartoesAprovados);
     }
 
 }
