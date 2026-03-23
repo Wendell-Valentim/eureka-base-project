@@ -1,6 +1,12 @@
 spring:
   application:
     name: mscartoes
+  # fila e conexão com o broker $
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 server:
   port: 0
 h2:
@@ -20,3 +26,7 @@ eureka:
     hostname: localhost
     prefer-ip-address: false
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+#comunicação com a fila
+mq:
+  queues:
+    emissao-cartoes: emissao-cartoes

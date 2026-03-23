@@ -2,6 +2,7 @@ package io.github.wendellvalentim.msavaliadorcredito.service;
 
 import io.github.wendellvalentim.msavaliadorcredito.infra.CartaoResourceClient;
 import io.github.wendellvalentim.msavaliadorcredito.infra.ClienteResourceClient;
+import io.github.wendellvalentim.msavaliadorcredito.infra.mqueue.SolicitacaoEmissaoCartaoPublisher;
 import io.github.wendellvalentim.msavaliadorcredito.model.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
 public class avaliadorCreditoService {
     private final ClienteResourceClient client;
     private final CartaoResourceClient  cartaoClient;
+    private final SolicitacaoEmissaoCartaoPublisher emissaoCartaoPublisher;
 
     public SituacaoCliente obterSituacaoCliente(String cpf) {
         ResponseEntity<DadosCliente> dadosClientResponse = client.dadosCliente(cpf);
@@ -49,6 +52,12 @@ public class avaliadorCreditoService {
             return aprovado;
         }).collect(Collectors.toList());
         return new RetornoAvaliacaoCliente(listaCartoesAprovados);
+    }
+
+    public Protocolo solicitarEmissaoDeCartao (DadosSolicitacaoEmissaoCartao dados) {
+        emissaoCartaoPublisher.solicitarCartao(dados);
+        var protocolo = UUID.randomUUID();
+        return new Protocolo(protocolo);
     }
 
 }

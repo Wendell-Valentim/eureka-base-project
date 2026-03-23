@@ -1,8 +1,6 @@
 package io.github.wendellvalentim.msavaliadorcredito.controller;
 
-import io.github.wendellvalentim.msavaliadorcredito.model.DadosAvaliacao;
-import io.github.wendellvalentim.msavaliadorcredito.model.RetornoAvaliacaoCliente;
-import io.github.wendellvalentim.msavaliadorcredito.model.SituacaoCliente;
+import io.github.wendellvalentim.msavaliadorcredito.model.*;
 import io.github.wendellvalentim.msavaliadorcredito.service.avaliadorCreditoService;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
@@ -33,5 +31,10 @@ public class AvaliadorCreditoController {
         return ResponseEntity.ok(retornoAvaliacaoCliente);
     }
 
+    @PostMapping("solicitacoes-cartao")
+    public ResponseEntity<Protocolo> emissaoCartao(@RequestBody DadosSolicitacaoEmissaoCartao dados) {
+        Protocolo protocolo = service.solicitarEmissaoDeCartao(dados);
+        return ResponseEntity.ok(protocolo);
+    }
 
 }
