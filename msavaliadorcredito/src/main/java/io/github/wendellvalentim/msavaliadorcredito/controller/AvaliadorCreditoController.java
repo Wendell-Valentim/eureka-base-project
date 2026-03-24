@@ -27,7 +27,7 @@ public class AvaliadorCreditoController {
 
     @PostMapping
     public ResponseEntity<RetornoAvaliacaoCliente> realizarAvaliacao(@RequestBody DadosAvaliacao dados) {
-        val retornoAvaliacaoCliente = service.realizarAvaliacao(dados.getCpf(), dados.getRenda());
+        val retornoAvaliacaoCliente = service.realizarAvaliacao(dados.cpf(), dados.renda());
         return ResponseEntity.ok(retornoAvaliacaoCliente);
     }
 

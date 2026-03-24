@@ -24,10 +24,7 @@ public class avaliadorCreditoService {
     public SituacaoCliente obterSituacaoCliente(String cpf) {
         ResponseEntity<DadosCliente> dadosClientResponse = client.dadosCliente(cpf);
         ResponseEntity<List<CartaoCliente>> dadosCartaoResponse = cartaoClient.getCartoesByCliente(cpf);
-        return SituacaoCliente.builder()
-                .cliente(dadosClientResponse.getBody())
-                .cartao(dadosCartaoResponse.getBody())
-                .build();
+        return new SituacaoCliente(dadosClientResponse.getBody(),dadosCartaoResponse.getBody());
     }
 
     public RetornoAvaliacaoCliente realizarAvaliacao(String cpf, Long renda) {
@@ -35,19 +32,16 @@ public class avaliadorCreditoService {
         ResponseEntity<List<Cartao>> cartoesResponse = cartaoClient.getCartoesRendaAte(renda);
 
         List<Cartao> cartoes = cartoesResponse.getBody();
+        DadosCliente dadosCliente = dadosClientResponse.getBody();
         var listaCartoesAprovados = cartoes.stream().map(cartao -> {
-            DadosCliente dadosCliente = dadosClientResponse.getBody();
 
-            BigDecimal limiteBasico = cartao.getLimite();
-            BigDecimal idadeBD = BigDecimal.valueOf(dadosCliente.getIdade());
+            BigDecimal limiteBasico = cartao.limite();
+            BigDecimal idadeBD = BigDecimal.valueOf(dadosCliente.idade());
 
             BigDecimal fator = idadeBD.divide(BigDecimal.valueOf(10));
             BigDecimal limiteAprovado = fator.multiply(limiteBasico);
 
-            CartoesAprovados aprovado = new CartoesAprovados();
-            aprovado.setNome(cartao.getNome());
-            aprovado.setBandeira(cartao.getBandeira());
-            aprovado.setLimiteAprovado(limiteAprovado);
+            CartoesAprovados aprovado = new CartoesAprovados(cartao.nome(),cartao.bandeira(), limiteAprovado);
 
             return aprovado;
         }).collect(Collectors.toList());

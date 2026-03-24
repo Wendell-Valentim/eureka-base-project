@@ -4,10 +4,10 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Data
-public class CartoesAprovados {
 
-    private String nome;
-    private String bandeira;
-    private BigDecimal limiteAprovado;
+public record CartoesAprovados (String nome,
+         String bandeira,
+         BigDecimal limiteAprovado ){
+
+
 }

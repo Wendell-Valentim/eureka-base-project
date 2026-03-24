@@ -21,7 +21,7 @@ public class EmissaoCartaoSubscriber {
 
     @RabbitListener(queues = "${mq.queues.emissao-cartoes}")
     public void receberSolicitacaoEmissao(@Payload DadosSolicitacaoEmissaoCartao dados) {
-        Cartao cartao = cartaoRepository.findById(dados.idCartao()).orElseThrow();
+        Cartao cartao = cartaoRepository.findById(dados.idCartao()).orElseThrow(() -> new RuntimeException("Erro: Cartão ID " + dados.idCartao() + " não encontrado no banco!"));
 
         var clienteCartao = new ClienteCartao();
         clienteCartao.setCartao(cartao);

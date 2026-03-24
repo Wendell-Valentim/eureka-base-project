@@ -7,11 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-public class SituacaoCliente {
-    private DadosCliente cliente;
-    private List<CartaoCliente> cartao;
+public record SituacaoCliente (DadosCliente cliente,
+         List<CartaoCliente> cartao){
+
 }
