@@ -1,6 +1,4 @@
-package io.github.wendellvalentim.msavaliadorcredito.model;
-
-import lombok.Data;
+package io.github.wendellvalentim.msavaliadorcredito.model.cliente;
 
 import java.time.LocalDate;
 import java.util.UUID;

@@ -4,7 +4,7 @@ package io.github.wendellvalentim.msavaliadorcredito.service;
 import feign.FeignException;
 import io.github.wendellvalentim.msavaliadorcredito.infra.CartaoResourceClient;
 import io.github.wendellvalentim.msavaliadorcredito.infra.ClienteResourceClient;
-import io.github.wendellvalentim.msavaliadorcredito.model.DadosCliente;
+import io.github.wendellvalentim.msavaliadorcredito.model.cliente.DadosCliente;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,13 +13,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;
-import java.util.Optional;
 import java.util.UUID;
 
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import static  org.assertj.core.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 public class avaliadorCreditoServiceTest {

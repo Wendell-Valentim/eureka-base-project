@@ -1,7 +1,7 @@
 package io.github.wendellvalentim.msavaliadorcredito.infra;
 
-import io.github.wendellvalentim.msavaliadorcredito.model.Cartao;
-import io.github.wendellvalentim.msavaliadorcredito.model.CartaoCliente;
+import io.github.wendellvalentim.msavaliadorcredito.model.cartao.Cartao;
+import io.github.wendellvalentim.msavaliadorcredito.model.cartao.CartaoCliente;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

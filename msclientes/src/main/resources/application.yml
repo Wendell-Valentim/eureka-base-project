@@ -12,7 +12,7 @@ h2:
     driver-class-name: org.h2.Driver
 server:
   port: 0
-
+#conexao com eureka
 eureka:
   client:
     service-url:
@@ -21,3 +21,13 @@ eureka:
     hostname: localhost
     prefer-ip-address: false
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+#actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+#logs
+logging:
+  file:
+    name: ./logs/log-file.log

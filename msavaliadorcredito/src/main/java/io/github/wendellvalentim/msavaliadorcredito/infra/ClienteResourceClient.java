@@ -1,6 +1,6 @@
 package io.github.wendellvalentim.msavaliadorcredito.infra;
 
-import io.github.wendellvalentim.msavaliadorcredito.model.DadosCliente;
+import io.github.wendellvalentim.msavaliadorcredito.model.cliente.DadosCliente;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

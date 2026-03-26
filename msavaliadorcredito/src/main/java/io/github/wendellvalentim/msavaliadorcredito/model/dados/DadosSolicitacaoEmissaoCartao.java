@@ -1,6 +1,4 @@
-package io.github.wendellvalentim.msavaliadorcredito.model;
-
-import lombok.Data;
+package io.github.wendellvalentim.msavaliadorcredito.model.dados;
 
 import java.math.BigDecimal;
 import java.util.UUID;

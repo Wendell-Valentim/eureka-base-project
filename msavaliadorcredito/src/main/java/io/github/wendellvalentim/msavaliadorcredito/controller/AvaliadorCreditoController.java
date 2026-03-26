@@ -1,6 +1,10 @@
 package io.github.wendellvalentim.msavaliadorcredito.controller;
 
-import io.github.wendellvalentim.msavaliadorcredito.model.*;
+import io.github.wendellvalentim.msavaliadorcredito.model.cliente.RetornoAvaliacaoCliente;
+import io.github.wendellvalentim.msavaliadorcredito.model.cliente.SituacaoCliente;
+import io.github.wendellvalentim.msavaliadorcredito.model.dados.DadosAvaliacao;
+import io.github.wendellvalentim.msavaliadorcredito.model.dados.DadosSolicitacaoEmissaoCartao;
+import io.github.wendellvalentim.msavaliadorcredito.model.protocolo.Protocolo;
 import io.github.wendellvalentim.msavaliadorcredito.service.avaliadorCreditoService;
 import lombok.RequiredArgsConstructor;
 import lombok.val;

@@ -1,7 +1,6 @@
 package io.github.wendellvalentim.msavaliadorcredito.infra.mqueue;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.wendellvalentim.msavaliadorcredito.model.DadosSolicitacaoEmissaoCartao;
+import io.github.wendellvalentim.msavaliadorcredito.model.dados.DadosSolicitacaoEmissaoCartao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
