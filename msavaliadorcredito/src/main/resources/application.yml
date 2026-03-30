@@ -2,7 +2,7 @@ spring:
   application:
     name: mscavaliadorcredito
   rabbitmq:
-    host: ${RABBITMQ_SERVER}  }
+    host: ${RABBITMQ_SERVER}
     port: 5672
     username: guest
     password: guest
@@ -13,8 +13,7 @@ eureka:
     service-url:
       defaultZone: http://${EUREKA_USER}:${EUREKA_PASS}@${EUREKA_SERVER}:8761/eureka
   instance:
-    hostname: localhost
-    prefer-ip-address: false
+    prefer-ip-address: true
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 mq:
   queues:
