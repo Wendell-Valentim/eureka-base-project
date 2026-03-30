@@ -2,7 +2,7 @@ spring:
   application:
     name: mscavaliadorcredito
   rabbitmq:
-    host: localhost
+    host: ${RABBITMQ_SERVER}  }
     port: 5672
     username: guest
     password: guest
@@ -11,7 +11,7 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://cursoms-eureka-user:cursoms-eureka-user@localhost:8761/eureka
+      defaultZone: http://${EUREKA_USER}:${EUREKA_PASS}@${EUREKA_SERVER}:8761/eureka
   instance:
     hostname: localhost
     prefer-ip-address: false
